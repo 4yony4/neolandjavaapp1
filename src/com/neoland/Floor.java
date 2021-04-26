@@ -1,10 +1,13 @@
 package com.neoland;
 
+import java.util.ArrayList;
+
 public class Floor {
 
     private Room arRooms[];
     private int iNumberOfRooms;
     private int iExistingRooms;
+    private double dPrice=0.0;
 
     public Floor(int iNumberOfRooms){
         this.iNumberOfRooms=iNumberOfRooms;
@@ -26,7 +29,21 @@ public class Floor {
     }
 
     public void assignDoorToRoom(Room room,Door door){
+        door.setBlShared(true);
         room.addDoor(door);
+    }
+
+    public double getdPrice(){
+        calculateFloorPrice();
+        return dPrice;
+    }
+
+    public void calculateFloorPrice(){
+        dPrice=0.0;
+        int i=0;
+        for (i=0;i<iExistingRooms;i++){
+            dPrice=dPrice+arRooms[i].getdPrice();
+        }
     }
 
 }

@@ -9,7 +9,7 @@ public class Door {
     private boolean blHasWindowPane;
     private double dPrice;
     private DoorNob doorNob;
-
+    private boolean blShared=false;
 
     /**
      * CONSTRUCTOR of Door, requests the initial price for the door.
@@ -82,8 +82,21 @@ public class Door {
     }
 
     public double getdPrice() {
-        return dPrice;
+        if(blShared==true){
+            return dPrice/2;
+        }
+        else{
+            return dPrice;
+        }
     }
 
+
+    public boolean isBlShared() {
+        return blShared;
+    }
+
+    public void setBlShared(boolean blShared) {
+        this.blShared = blShared;
+    }
 
 }

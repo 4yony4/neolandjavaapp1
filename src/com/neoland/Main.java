@@ -10,8 +10,27 @@ public class Main {
         Room roomBathroom=floor1.createNewRoom(1);
         Room roomHall=floor1.createNewRoom(3);
 
-        Door doorLiving1=floor1.createNewDoor(roomLiving,15.0);
-        floor1.assignDoorToRoom(roomHall,doorLiving1);
+        //START CREATE LIVING ROOM DOORS
+        Door doorLivingShared1=floor1.createNewDoor(roomLiving,15.0);
+        floor1.createNewDoor(roomLiving,25.0);
+        floor1.createNewDoor(roomLiving,5.0);
+        //END CREATE LIVING ROOM DOORS
+
+        //START CREATE KITCHEN ROOM DOORS
+        Door doorKitchenShared1=floor1.createNewDoor(roomKitchen,45.0);
+        //END CREATE KITCHEN ROOM DOORS
+
+        //START CREATE BATHROOM ROOM DOORS
+        Door doorBathroomShared1=floor1.createNewDoor(roomBathroom,17.0);
+        doorBathroomShared1.setsColor("YELLOW");
+        //END CREATE BATHROOM ROOM DOORS
+
+        floor1.assignDoorToRoom(roomHall,doorLivingShared1);
+        floor1.assignDoorToRoom(roomHall,doorKitchenShared1);
+        floor1.assignDoorToRoom(roomHall,doorBathroomShared1);
+
+        double dPriceFloor1=floor1.getdPrice();
+        System.out.println("FLOR 1 PRICE: "+dPriceFloor1);
 
         /*
         Room roomLiving=new Room(3);

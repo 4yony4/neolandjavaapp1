@@ -35,6 +35,7 @@ public class Room {
     }
 
     private void calculatePrice(){
+        dPrice=0.0;
         int i=0;
         for (i=0;i<iExistingDoors;i++){
             dPrice=dPrice+doors[i].getdPrice();
