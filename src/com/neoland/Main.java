@@ -4,6 +4,46 @@ public class Main {
 
     public static void main(String args[]){
 
+        Property propertyHouse=new Property("HDSHDHDHD66666");
+        Floor floor1=propertyHouse.addNewFloor(4);
+        Floor floor2=propertyHouse.addNewFloor(2);
+
+        Room roomLiving=floor1.createNewRoom(3);
+        Room roomKitchen=floor1.createNewRoom(1);
+        Room roomBathroom=floor1.createNewRoom(1);
+        Room roomHall=floor1.createNewRoom(3);
+
+        //START CREATE LIVING ROOM DOORS
+        Door doorLivingShared1=floor1.createNewDoor(roomLiving,15.0);
+        floor1.createNewDoor(roomLiving,25.0);
+        floor1.createNewDoor(roomLiving,5.0);
+        //END CREATE LIVING ROOM DOORS
+
+        //START CREATE KITCHEN ROOM DOORS
+        Door doorKitchenShared1=floor1.createNewDoor(roomKitchen,45.0);
+        //END CREATE KITCHEN ROOM DOORS
+
+        //START CREATE BATHROOM ROOM DOORS
+        Door doorBathroomShared1=floor1.createNewDoor(roomBathroom,17.0);
+        doorBathroomShared1.setsColor("YELLOW");
+        //END CREATE BATHROOM ROOM DOORS
+
+        floor1.assignDoorToRoom(roomHall,doorLivingShared1);
+        floor1.assignDoorToRoom(roomHall,doorKitchenShared1);
+        floor1.assignDoorToRoom(roomHall,doorBathroomShared1);
+
+        //STARTS FLOOR2
+        Room roomMainBedRoom=floor2.createNewRoom(1);
+        Room roomBathroom2=floor2.createNewRoom(1);
+        floor2.createNewDoor(roomMainBedRoom,50.0);
+        floor2.createNewDoor(roomBathroom2,30.0);
+
+        double dPriceProperty=propertyHouse.getdPrice();
+        System.out.println("FLOOR1 PRICE: "+floor1.getdPrice());
+        System.out.println("FLOOR2 PRICE: "+floor2.getdPrice());
+        System.out.println("PROPERTY PRICE: "+dPriceProperty);
+
+        /*
         Floor floor1=new Floor(4);
         Room roomLiving=floor1.createNewRoom(3);
         Room roomKitchen=floor1.createNewRoom(1);
@@ -31,7 +71,7 @@ public class Main {
 
         double dPriceFloor1=floor1.getdPrice();
         System.out.println("FLOR 1 PRICE: "+dPriceFloor1);
-
+            */
         /*
         Room roomLiving=new Room(3);
         Room roomKitchen=new Room(1);

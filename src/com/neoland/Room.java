@@ -40,6 +40,7 @@ public class Room {
         for (i=0;i<iExistingDoors;i++){
             dPrice=dPrice+doors[i].getdPrice();
         }
+
     }
 
 }
