@@ -10,6 +10,7 @@ public class Door {
     private double dPrice;
     private DoorNob doorNob;
 
+
     /**
      * CONSTRUCTOR
      */
@@ -31,7 +32,6 @@ public class Door {
         this.dWidth=1.0;
         this.iDoorNobType=303;
         this.blHasWindowPane=false;
-        this.dPrice=10.0;
     }
 
     public void setdHeight(double dHeight) {
@@ -39,7 +39,7 @@ public class Door {
     }
 
     /**
-     * This method defines the color of the door, the complete door.
+     * This method defines the color of the door, it will add a cost of 2.0 to each color change.
      * @param sNewColor The color you want to assign to the door.
      */
     public void setsColor(String sNewColor){
