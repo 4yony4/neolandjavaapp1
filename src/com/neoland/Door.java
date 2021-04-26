@@ -12,7 +12,8 @@ public class Door {
 
 
     /**
-     * CONSTRUCTOR
+     * CONSTRUCTOR of Door, requests the initial price for the door.
+     * @param dPrice initial price of the door.
      */
     public Door(double dPrice){
         this.dPrice=dPrice;

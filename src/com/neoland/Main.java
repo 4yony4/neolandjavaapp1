@@ -3,10 +3,17 @@ package com.neoland;
 public class Main {
 
     public static void main(String args[]){
-        int x=5;
-        int y=10;
-        int z=x;
 
+        Floor floor1=new Floor(4);
+        Room roomLiving=floor1.createNewRoom(3);
+        Room roomKitchen=floor1.createNewRoom(1);
+        Room roomBathroom=floor1.createNewRoom(1);
+        Room roomHall=floor1.createNewRoom(3);
+
+        Door doorLiving1=floor1.createNewDoor(roomLiving,15.0);
+        floor1.assignDoorToRoom(roomHall,doorLiving1);
+
+        /*
         Room roomLiving=new Room(3);
         Room roomKitchen=new Room(1);
 
@@ -31,7 +38,7 @@ public class Main {
 
         System.out.println("PRICE OF LIVING ROOM: "+roomLiving.getdPrice());
         System.out.println("PRICE OF KITCHEN ROOM: "+roomKitchen.getdPrice());
-
+*/
         /*
         Door doorRoom1=new Door(20.0);//Creating a new object Door based on the Door class Template
         Door doorRoom2=new Door(30.0);

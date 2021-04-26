@@ -8,6 +8,11 @@ public class Room {
     private int iExistingDoors;
     private double dPrice;
 
+
+    /**
+     * Constructor of the Room, will require a predefined number of doors you want in the room
+     * @param iDoorsNumber Number of doors in the room (holes for doors).
+     */
     public Room(int iDoorsNumber){
         this.iDoorsNumber=iDoorsNumber;
         doors = new Door[iDoorsNumber];
