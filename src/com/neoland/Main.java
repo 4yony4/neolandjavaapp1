@@ -4,9 +4,11 @@ public class Main {
 
     public static void main(String args[]){
 
-        Property propertyHouse=new Property("HDSHDHDHD66666");
-        Floor floor1=propertyHouse.addNewFloor(4);
-        Floor floor2=propertyHouse.addNewFloor(2);
+        Building building=new Building("HDSHDHDHD66666");
+        Floor floor1=building.addNewFloor(4);
+        Floor floor2=building.addNewFloor(2);
+        Property property=new Property("HHHHHHSSSS");
+        Complex complex=new Complex("JDHDHDHDHD");
 
         Room roomLiving=floor1.createNewRoom(3);
         Room roomKitchen=floor1.createNewRoom(1);
@@ -38,9 +40,10 @@ public class Main {
         floor2.createNewDoor(roomMainBedRoom,50.0);
         floor2.createNewDoor(roomBathroom2,30.0);
 
-        double dPriceProperty=propertyHouse.getdPrice();
+        double dPriceProperty=building.getdPrice();
         System.out.println("FLOOR1 PRICE: "+floor1.getdPrice());
         System.out.println("FLOOR2 PRICE: "+floor2.getdPrice());
+        //System.out.println("ELEVATOR PRICE: "+building.elevator.getdPrice());
         System.out.println("PROPERTY PRICE: "+dPriceProperty);
 
         /*
