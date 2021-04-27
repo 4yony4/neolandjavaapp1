@@ -2,7 +2,7 @@ package com.neoland;
 
 import java.util.ArrayList;
 
-public class Property {
+public class Property extends Object {
 
     private String sEirCode;
     private String sCounty;

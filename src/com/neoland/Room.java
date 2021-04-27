@@ -1,5 +1,7 @@
 package com.neoland;
 
+import java.util.Arrays;
+
 public class Room {
 
 
@@ -40,7 +42,15 @@ public class Room {
         for (i=0;i<iExistingDoors;i++){
             dPrice=dPrice+doors[i].getdPrice();
         }
-
     }
 
+    @Override
+    public String toString() {
+        return "Room{" +
+                "doors=" + Arrays.toString(doors) +
+                ", iDoorsNumber=" + iDoorsNumber +
+                ", iExistingDoors=" + iExistingDoors +
+                ", dPrice=" + dPrice +
+                '}';
+    }
 }

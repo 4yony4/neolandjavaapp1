@@ -15,6 +15,8 @@ public class Main {
         Room roomBathroom=floor1.createNewRoom(1);
         Room roomHall=floor1.createNewRoom(3);
 
+        System.out.println("LIVING ROOM IS: "+roomLiving);
+
         //START CREATE LIVING ROOM DOORS
         Door doorLivingShared1=floor1.createNewDoor(roomLiving,15.0);
         floor1.createNewDoor(roomLiving,25.0);
@@ -41,10 +43,10 @@ public class Main {
         floor2.createNewDoor(roomBathroom2,30.0);
 
         double dPriceProperty=building.getdPrice();
-        System.out.println("FLOOR1 PRICE: "+floor1.getdPrice());
-        System.out.println("FLOOR2 PRICE: "+floor2.getdPrice());
+        //System.out.println("FLOOR1 PRICE: "+floor1.getdPrice());
+        //System.out.println("FLOOR2 PRICE: "+floor2.getdPrice());
         //System.out.println("ELEVATOR PRICE: "+building.elevator.getdPrice());
-        System.out.println("PROPERTY PRICE: "+dPriceProperty);
+        //System.out.println("PROPERTY PRICE: "+dPriceProperty);
 
         /*
         Floor floor1=new Floor(4);
