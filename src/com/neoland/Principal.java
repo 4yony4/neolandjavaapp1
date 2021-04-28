@@ -65,11 +65,11 @@ public class Principal implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton jButtonAction=(JButton)e.getSource();
-        if(jButtonAction == jButton){
+        //JButton jButtonAction=(JButton)e.getSource();
+        if(e.getSource() == jButton){
             jLabel.setText("GOODBYE");
         }
-        else if(jButtonAction == jButton2){
+        else if(e.getSource() == jButton2){
             jLabel.setText("WE ARE LEARNING JAVA");
         }
 
