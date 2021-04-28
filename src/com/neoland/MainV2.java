@@ -7,10 +7,10 @@ import com.neoland.materials.Door;
 import com.neoland.spaces.Floor;
 import com.neoland.spaces.Room;
 
-public class Main {
+public class MainV2 {
 
 
-    public static void main(String args[]){
+    public static void mainV2(String args[]){
 
         Building building=new Building("HDSHDHDHD66666");
         Floor floor1=building.addNewFloor(4);
