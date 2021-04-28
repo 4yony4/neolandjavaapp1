@@ -1,4 +1,4 @@
-package com.neoland;
+package com.neoland.spaces;
 
 public class Elevator {
 

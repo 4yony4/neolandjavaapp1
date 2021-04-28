@@ -1,10 +1,14 @@
-package com.neoland;
+package com.neoland.materials;
+
+import com.neoland.singleton.DataHolder;
 
 public class DoorNob {
 
     private String sColor;
+    private double dPrice;
 
-    public DoorNob(){
+    public DoorNob(double dPrice){
+        this.dPrice=dPrice+ DataHolder.dECO_TAX;
         sColor="Silver";
     }
 

@@ -1,4 +1,6 @@
-package com.neoland;
+package com.neoland.infraestructure;
+
+import com.neoland.spaces.Floor;
 
 import java.util.ArrayList;
 

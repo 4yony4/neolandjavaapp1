@@ -1,6 +1,7 @@
-package com.neoland;
+package com.neoland.spaces;
 
-import java.util.ArrayList;
+import com.neoland.materials.Door;
+import com.neoland.singleton.DataHolder;
 
 public class Floor {
 
@@ -10,6 +11,7 @@ public class Floor {
     private double dPrice=0.0;
 
     public Floor(int iNumberOfRooms){
+
         this.iNumberOfRooms=iNumberOfRooms;
         arRooms=new Room[iNumberOfRooms];
         iExistingRooms=0;
@@ -22,10 +24,14 @@ public class Floor {
         return room;
     }
 
-    public Door createNewDoor(Room room,double doorPrice){
+    public Door createNewDoor(Room room, double doorPrice){
         Door door=new Door(doorPrice);
         room.addDoor(door);
         return door;
+    }
+
+    public void removeDoor(Room room,Door door){
+        room.removeDoor(door);
     }
 
     public void assignDoorToRoom(Room room,Door door){
@@ -46,6 +52,12 @@ public class Floor {
         }
     }
 
+    public void destroy(){
+        for (int i=0;i<arRooms.length;i++){
+            arRooms[i].destroy();
+            arRooms[i]=null;
+        }
+    }
 
 
 }

@@ -1,4 +1,6 @@
-package com.neoland;
+package com.neoland.materials;
+
+import com.neoland.singleton.DataHolder;
 
 public class Door {
     //CLASS VARIABLES ARE ATTRIBUTES
@@ -16,9 +18,15 @@ public class Door {
      * @param dPrice initial price of the door.
      */
     public Door(double dPrice){
-        this.dPrice=dPrice;
+
+        System.out.println("DOOR PRICE BEFORE TAX: "+dPrice);
+        this.dPrice=dPrice + DataHolder.dECO_TAX;
+        System.out.println("DOOR PRICE AFTER TAX: "+this.dPrice);
+
+        DataHolder.dECO_TAX=DataHolder.dECO_TAX+0.5;
+
         this.downloadData();
-        this.doorNob=new DoorNob();
+        this.doorNob=new DoorNob(2.0);
     }
 
 
@@ -59,6 +67,20 @@ public class Door {
             blHasWindowPane=blPane;
         }
 
+    }
+
+    @Override
+    public String toString() {
+        return "Door{" +
+                "sColor='" + sColor + '\'' +
+                ", dHeight=" + dHeight +
+                ", dWidth=" + dWidth +
+                ", iDoorNobType=" + iDoorNobType +
+                ", blHasWindowPane=" + blHasWindowPane +
+                ", dPrice=" + dPrice +
+                ", doorNob=" + doorNob +
+                ", blShared=" + blShared +
+                '}';
     }
 
     public String getsColor(){

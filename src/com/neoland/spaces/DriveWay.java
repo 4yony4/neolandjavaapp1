@@ -1,8 +1,8 @@
-package com.neoland;
+package com.neoland.spaces;
 
 public class DriveWay {
 
-    double dPrice;
+    public double dPrice;
 
     public DriveWay(double dPrice){
         this.dPrice=dPrice;

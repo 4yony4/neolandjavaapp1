@@ -1,6 +1,14 @@
 package com.neoland;
 
+import com.neoland.infraestructure.Building;
+import com.neoland.infraestructure.Complex;
+import com.neoland.infraestructure.Property;
+import com.neoland.materials.Door;
+import com.neoland.spaces.Floor;
+import com.neoland.spaces.Room;
+
 public class Main {
+
 
     public static void main(String args[]){
 
@@ -15,12 +23,13 @@ public class Main {
         Room roomBathroom=floor1.createNewRoom(1);
         Room roomHall=floor1.createNewRoom(3);
 
-        System.out.println("LIVING ROOM IS: "+roomLiving);
+        //System.out.println("LIVING ROOM IS: "+roomLiving);
 
         //START CREATE LIVING ROOM DOORS
         Door doorLivingShared1=floor1.createNewDoor(roomLiving,15.0);
         floor1.createNewDoor(roomLiving,25.0);
         floor1.createNewDoor(roomLiving,5.0);
+
         //END CREATE LIVING ROOM DOORS
 
         //START CREATE KITCHEN ROOM DOORS
@@ -30,6 +39,7 @@ public class Main {
         //START CREATE BATHROOM ROOM DOORS
         Door doorBathroomShared1=floor1.createNewDoor(roomBathroom,17.0);
         doorBathroomShared1.setsColor("YELLOW");
+        //System.out.println("SHARED BATHROOM DOOR IS: "+doorBathroomShared1);
         //END CREATE BATHROOM ROOM DOORS
 
         floor1.assignDoorToRoom(roomHall,doorLivingShared1);
@@ -40,7 +50,11 @@ public class Main {
         Room roomMainBedRoom=floor2.createNewRoom(1);
         Room roomBathroom2=floor2.createNewRoom(1);
         floor2.createNewDoor(roomMainBedRoom,50.0);
-        floor2.createNewDoor(roomBathroom2,30.0);
+        Door doorBathroom2=floor2.createNewDoor(roomBathroom2,30.0);
+
+        floor2.removeDoor(roomBathroom2,doorBathroom2);
+        doorBathroom2=null;
+
 
         double dPriceProperty=building.getdPrice();
         //System.out.println("FLOOR1 PRICE: "+floor1.getdPrice());
@@ -126,5 +140,7 @@ public class Main {
         System.out.println("WINDOW PANE OF DOOR2 IS: "+doorRoom1.isBlHasWindowPane());
          */
     }
+
+
 
 }

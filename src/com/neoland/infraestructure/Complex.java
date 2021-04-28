@@ -1,8 +1,10 @@
-package com.neoland;
+package com.neoland.infraestructure;
+
+import com.neoland.spaces.DriveWay;
 
 public class Complex extends Property{
 
-    DriveWay driveWay;
+    public DriveWay driveWay;
 
     public Complex(String sEirCode) {
         super(sEirCode);

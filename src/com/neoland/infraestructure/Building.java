@@ -1,4 +1,7 @@
-package com.neoland;
+package com.neoland.infraestructure;
+
+import com.neoland.spaces.Elevator;
+import com.neoland.spaces.Floor;
 
 public class Building extends Property{
 
