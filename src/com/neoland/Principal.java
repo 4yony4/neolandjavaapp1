@@ -1,5 +1,6 @@
 package com.neoland;
 
+import com.neoland.model.DBAdmin;
 import com.neoland.views.MainView;
 
 import javax.swing.*;
@@ -11,7 +12,10 @@ public class Principal{
 
 
     public static void main(String args[]){
-        MainView mainView=new MainView();
+        //MainView mainView=new MainView();
+        DBAdmin dbAdmin=new DBAdmin();
+        dbAdmin.getUserTable();
+
         new Principal();
     }
 
