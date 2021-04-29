@@ -40,7 +40,7 @@ public class MainView {
 
 
     public MainView(){
-        mainViewEventsAdmin=new MainViewEventsAdmin(this);
+        mainViewEventsAdmin=new MainViewEventsAdmin();
         initScreen();
     }
 
@@ -143,5 +143,86 @@ public class MainView {
 
     }
 
+    class MainViewEventsAdmin implements ActionListener, WindowListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //JButton jButtonAction=(JButton)e.getSource();
+            if(e.getSource() == jButtonProperty){
+                panelCreatePropertyForm.setVisible(true);
+            }
+            else if(e.getSource() == jButtonExit){
+                //jLabel.setText("WE ARE LEARNING JAVA");
+                System.exit(0);
+            }
+            else if(e.getSource() == jButtonBuilding){
+                if(property==null){
+                    property=new Building(jTextFieldEIR.getText());
+                    property.addNewFloor(4);
+                    property.addNewFloor(4);
+                    property.addNewFloor(4);
+                    jLabel.setText("JUST CREATED A BUILDING WITH EIR: "+jTextFieldEIR.getText());
+                    jButtonCalculatePrice.setEnabled(true);
+                    jButtonCreateFloor.setEnabled(true);
+                }
+                else{
+                    jLabel.setText("YOU ALREADY CREATED A BUILDING  ");
+                }
 
+            }
+            else if(e.getSource() == jButtonBungalow){
+                property=new Bungalow(jTextFieldEIR.getText());
+                jButtonCalculatePrice.setEnabled(true);
+                jButtonCreateFloor.setEnabled(true);
+                jLabel.setText("JUST CREATED A Bungalow WITH EIR: "+jTextFieldEIR.getText());
+            }
+            else if(e.getSource() == jButtonComplex){
+                property=new Complex(jTextFieldEIR.getText());
+                jButtonCalculatePrice.setEnabled(true);
+                jButtonCreateFloor.setEnabled(true);
+                jLabel.setText("JUST CREATED A Complex WITH EIR: "+jTextFieldEIR.getText());
+            }
+            else if(e.getSource()==jButtonCalculatePrice){
+                double finalPrice=property.getdPrice();
+                jLabel.setText("THE PRICE IS: "+finalPrice);
+
+            }
+        }
+
+        @Override
+        public void windowOpened(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.exit(0);
+        }
+
+        @Override
+        public void windowClosed(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowIconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowDeiconified(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowActivated(WindowEvent e) {
+
+        }
+
+        @Override
+        public void windowDeactivated(WindowEvent e) {
+
+        }
+    }
 }
+
+
