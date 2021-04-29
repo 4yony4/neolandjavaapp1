@@ -1,58 +1,24 @@
 package com.neoland;
 
+import com.neoland.views.MainView;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Principal implements ActionListener {
-    private JFrame jFrameMain;
-    private JLabel jLabel;
-    private JButton jButton;
-    private JButton jButton2;
+public class Principal{
+
 
     public static void main(String args[]){
-        Principal principal=new Principal();
-        principal.initScreen();
+        MainView mainView=new MainView();
+        new Principal();
     }
 
     public Principal(){
         System.out.println(mathSum(5,10));
         System.out.println(mathSum(13.5,22.78));
-    }
-
-    public void initScreen(){
-        jFrameMain=new JFrame();
-
-        //START PANEL CENTER CREATION
-        JPanel panelCenter=new JPanel();
-        //panelCenter.setLayout(new BorderLayout());
-        panelCenter.setPreferredSize(new Dimension(1200, 800));
-        panelCenter.setBackground(Color.ORANGE);
-        jLabel=new JLabel();
-        jLabel.setText("HELLO WORLD");
-        panelCenter.add(jLabel, BorderLayout.CENTER);
-        //END PANEL CENTER CREATION
-
-        //START PANEL EAST CREATION
-        JPanel panelEast=new JPanel();
-        panelEast.setPreferredSize(new Dimension(200, 400));
-        panelEast.setBackground(Color.blue);
-        jButton=new JButton();
-        jButton.setText("PRESS ME");
-        jButton.addActionListener(this);
-        panelEast.add(jButton,BorderLayout.CENTER);
-
-        jButton2=new JButton();
-        jButton2.setText("SECOND BTN");
-        jButton2.addActionListener(this);
-        panelEast.add(jButton2,BorderLayout.SOUTH);
-        //END PANEL EAST CREATION
-
-        jFrameMain.add(panelCenter, BorderLayout.CENTER);
-        jFrameMain.add(panelEast, BorderLayout.EAST);
-        jFrameMain.pack();
-        jFrameMain.setVisible(true);
+        System.out.println(mathSum("13.5","22.78"));
     }
 
     public int mathSum(int a, int b){
@@ -63,16 +29,8 @@ public class Principal implements ActionListener {
         return a+b;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //JButton jButtonAction=(JButton)e.getSource();
-        if(e.getSource() == jButton){
-            jLabel.setText("GOODBYE");
-        }
-        else if(e.getSource() == jButton2){
-            jLabel.setText("WE ARE LEARNING JAVA");
-        }
-
-
+    public double mathSum(String a, String b){
+        return Double.parseDouble(a)+Double.parseDouble(b);
     }
+
 }

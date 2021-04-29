@@ -33,7 +33,6 @@ public class Property extends Object {
 
     public double getdPrice() {
         calculatePrice();
-
         return dPrice;
     }
 

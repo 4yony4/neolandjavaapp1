@@ -19,12 +19,18 @@ public class Door {
      */
     public Door(double dPrice){
 
-        System.out.println("DOOR PRICE BEFORE TAX: "+dPrice);
+        //System.out.println("DOOR PRICE BEFORE TAX: "+dPrice);
         this.dPrice=dPrice + DataHolder.dECO_TAX;
-        System.out.println("DOOR PRICE AFTER TAX: "+this.dPrice);
+        //System.out.println("DOOR PRICE AFTER TAX: "+this.dPrice);
 
         DataHolder.dECO_TAX=DataHolder.dECO_TAX+0.5;
 
+        this.downloadData();
+        this.doorNob=new DoorNob(2.0);
+    }
+
+    public Door(){
+        this.dPrice=0;
         this.downloadData();
         this.doorNob=new DoorNob(2.0);
     }
