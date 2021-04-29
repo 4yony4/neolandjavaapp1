@@ -13,36 +13,40 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 /**
+ * THE VIEW
  * Class that will draw our VIEW side of our APP.
  */
-public class MainView implements ActionListener, WindowListener {
-    private JFrame  jFrameMain =      null;
-    private JLabel  jLabel     =      null;
-    private JButton jButtonProperty    =      null;
-    private JButton jButtonCreateFloor   =      null;
-    private JButton jButtonExit   =      null;
-    private JButton jButtonBuilding   =      null;
-    private JButton jButtonBungalow   =      null;
-    private JButton jButtonComplex   =      null;
-    private JButton jButtonCalculatePrice =null;
-    private JPanel  panelCenter=      null;
-    private JPanel  panelEast  =      null;
-    private JTextField jTextFieldEIR=null;
+public class MainView {
+    public JFrame  jFrameMain =      null;
+    public JLabel  jLabel     =      null;
+    public JButton jButtonProperty    =      null;
+    public JButton jButtonCreateFloor   =      null;
+    public JButton jButtonExit   =      null;
+    public JButton jButtonBuilding   =      null;
+    public JButton jButtonBungalow   =      null;
+    public JButton jButtonComplex   =      null;
+    public JButton jButtonCalculatePrice =null;
+    public JPanel  panelCenter=      null;
+    public JPanel  panelEast  =      null;
+    public JTextField jTextFieldEIR=null;
     /*private Building building=null;
     private Complex complex=null;
     private Bungalow bungalow=null;*/
-    private Property property=null;
+    public Property property=null;
 
-    private JPanel panelCreatePropertyForm = null;
+    public JPanel panelCreatePropertyForm = null;
+
+    private MainViewEventsAdmin mainViewEventsAdmin;
 
 
     public MainView(){
+        mainViewEventsAdmin=new MainViewEventsAdmin(this);
         initScreen();
     }
 
     public void initScreen(){
         jFrameMain=new JFrame();
-        jFrameMain.addWindowListener(this);
+        jFrameMain.addWindowListener(mainViewEventsAdmin);
 
         initPanels();
         initLabels();
@@ -86,33 +90,33 @@ public class MainView implements ActionListener, WindowListener {
     private void initButtons(){
         jButtonProperty=new JButton();
         jButtonProperty.setText("Create Property");
-        jButtonProperty.addActionListener(this);
+        jButtonProperty.addActionListener(mainViewEventsAdmin);
 
         jButtonCreateFloor=new JButton();
         jButtonCreateFloor.setEnabled(false);
         jButtonCreateFloor.setText("Create Floor");
-        jButtonCreateFloor.addActionListener(this);
+        jButtonCreateFloor.addActionListener(mainViewEventsAdmin);
 
         jButtonExit=new JButton();
         jButtonExit.setText("Exit");
-        jButtonExit.addActionListener(this);
+        jButtonExit.addActionListener(mainViewEventsAdmin);
 
         jButtonBuilding=new JButton();
         jButtonBuilding.setText("Create Building");
-        jButtonBuilding.addActionListener(this);
+        jButtonBuilding.addActionListener(mainViewEventsAdmin);
 
         jButtonBungalow=new JButton();
         jButtonBungalow.setText("Create Bungalow");
-        jButtonBungalow.addActionListener(this);
+        jButtonBungalow.addActionListener(mainViewEventsAdmin);
 
         jButtonComplex=new JButton();
         jButtonComplex.setText("Create Complex");
-        jButtonComplex.addActionListener(this);
+        jButtonComplex.addActionListener(mainViewEventsAdmin);
 
         jButtonCalculatePrice=new JButton();
         jButtonCalculatePrice.setEnabled(false);
         jButtonCalculatePrice.setText("GET PROPERTY PRICE");
-        jButtonCalculatePrice.addActionListener(this);
+        jButtonCalculatePrice.addActionListener(mainViewEventsAdmin);
     }
 
     private void initTextField(){
@@ -139,73 +143,5 @@ public class MainView implements ActionListener, WindowListener {
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
 
-        //JButton jButtonAction=(JButton)e.getSource();
-        if(e.getSource() == jButtonProperty){
-            panelCreatePropertyForm.setVisible(true);
-        }
-        else if(e.getSource() == jButtonExit){
-            //jLabel.setText("WE ARE LEARNING JAVA");
-            System.exit(0);
-        }
-        else if(e.getSource() == jButtonBuilding){
-            if(property==null){
-                property=new Building(jTextFieldEIR.getText());
-                property.addNewFloor(4);
-                property.addNewFloor(4);
-                property.addNewFloor(4);
-                jLabel.setText("JUST CREATED A BUILDING WITH EIR: "+jTextFieldEIR.getText());
-                jButtonCalculatePrice.setEnabled(true);
-                jButtonCreateFloor.setEnabled(true);
-            }
-            else{
-                jLabel.setText("YOU ALREADY CREATED A BUILDING  ");
-            }
-
-        }
-        else if(e.getSource() == jButtonBungalow){
-            property=new Bungalow(jTextFieldEIR.getText());
-            jButtonCalculatePrice.setEnabled(true);
-            jButtonCreateFloor.setEnabled(true);
-            jLabel.setText("JUST CREATED A Bungalow WITH EIR: "+jTextFieldEIR.getText());
-        }
-        else if(e.getSource() == jButtonComplex){
-            property=new Complex(jTextFieldEIR.getText());
-            jButtonCalculatePrice.setEnabled(true);
-            jButtonCreateFloor.setEnabled(true);
-            jLabel.setText("JUST CREATED A Complex WITH EIR: "+jTextFieldEIR.getText());
-        }
-        else if(e.getSource()==jButtonCalculatePrice){
-            double finalPrice=property.getdPrice();
-            jLabel.setText("THE PRICE IS: "+finalPrice);
-
-        }
-
-    }
-
-    @Override
-    public void windowOpened(WindowEvent e) {}
-
-    @Override
-    public void windowClosing(WindowEvent e) {
-        System.exit(0);
-
-    }
-
-    @Override
-    public void windowClosed(WindowEvent e) {}
-
-    @Override
-    public void windowIconified(WindowEvent e) {}
-
-    @Override
-    public void windowDeiconified(WindowEvent e) {}
-
-    @Override
-    public void windowActivated(WindowEvent e) {}
-
-    @Override
-    public void windowDeactivated(WindowEvent e) {}
 }
