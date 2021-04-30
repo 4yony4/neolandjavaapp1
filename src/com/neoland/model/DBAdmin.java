@@ -1,6 +1,11 @@
 package com.neoland.model;
 
+import com.neoland.dataclass.User;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 public class DBAdmin {
@@ -54,26 +59,29 @@ public class DBAdmin {
         }
     }
 
-    public void getUserTable(){
+    public HashMap<String,User> getUserTable(){
+        HashMap<String,User> mapUsers=new HashMap();
         try{
             Statement stmt= conn.createStatement();
-
             ResultSet resultSet=stmt.executeQuery("SELECT * FROM \"public\".\"users\"");
-
             boolean blHasNext=resultSet.next();
             while (blHasNext==true){
                 int id=resultSet.getInt("iuser");
                 String name=resultSet.getString("iname");
-                System.out.println("THE ROW IS: "+id+"  "+name);
+
+                User user=new User(id,name);
+                mapUsers.put(user.iuser+"",user);
+                //arUsers.add(user);
+                //System.out.println("THE ROW IS: "+user.iuser+"  "+ user.iname);
                 blHasNext=resultSet.next();
             }
-
             resultSet.close();
             stmt.close();
-
+            //System.out.println(arUsers);
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return mapUsers;
     }
 
     public void insertUser(int id,String name){
@@ -98,6 +106,23 @@ public class DBAdmin {
             preparedStmt.execute();
             preparedStmt.close();
 
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+    public void updateUsers(User user){
+        try{
+            String sQuery = "update users set iname=? where iuser=?";
+
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt = conn.prepareStatement(sQuery);
+            preparedStmt.setString (1, user.iname);
+            preparedStmt.setInt (2, user.iuser);
+            System.out.println(preparedStmt);
+
+            boolean blExecuteOK=preparedStmt.execute();
+            preparedStmt.close();
         }catch (SQLException throwables) {
             throwables.printStackTrace();
         }

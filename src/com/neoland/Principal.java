@@ -1,6 +1,10 @@
 package com.neoland;
 
+import com.neoland.dataclass.User;
 import com.neoland.model.DBAdmin;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Principal{
 
@@ -8,11 +12,24 @@ public class Principal{
     public static void main(String args[]){
         //MainView mainView=new MainView();
         DBAdmin dbAdmin=new DBAdmin();
-        dbAdmin.getUserTable();
-        dbAdmin.insertUser(8,"GABRIEL");
-        dbAdmin.getUserTable();
+        //dbAdmin.getUserTable();
+        //dbAdmin.insertUser(8,"GABRIEL");
+        //dbAdmin.updateUsers(8,"HALLOWEEN");
+        HashMap<String, User> mapUsers = dbAdmin.getUserTable();
+        User userTemp=mapUsers.get("7");
 
-        new Principal();
+        System.out.println(userTemp);
+
+        userTemp.iname="DAVE V3";
+
+        //dbAdmin.updateUsers(userTemp);
+
+        System.out.println(userTemp);
+
+
+
+
+        //new Principal();
     }
 
     public Principal(){
