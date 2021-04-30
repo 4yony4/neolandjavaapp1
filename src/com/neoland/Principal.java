@@ -15,6 +15,8 @@ public class Principal{
         //MainView mainView=new MainView();
         DBAdmin dbAdmin=new DBAdmin();
         dbAdmin.getUserTable();
+        dbAdmin.insertUser(8,"GABRIEL");
+        dbAdmin.getUserTable();
 
         new Principal();
     }
