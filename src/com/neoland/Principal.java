@@ -1,12 +1,6 @@
 package com.neoland;
 
 import com.neoland.model.DBAdmin;
-import com.neoland.views.MainView;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Principal{
 

@@ -1,7 +1,6 @@
 package com.neoland.spaces;
 
 import com.neoland.materials.Door;
-import com.neoland.singleton.DataHolder;
 
 public class Floor {
 

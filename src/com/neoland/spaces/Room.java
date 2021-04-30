@@ -2,7 +2,6 @@ package com.neoland.spaces;
 
 import com.neoland.materials.Door;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Room {

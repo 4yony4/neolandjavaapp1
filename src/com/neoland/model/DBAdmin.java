@@ -8,8 +8,14 @@ public class DBAdmin {
     private Connection conn;
 
     public DBAdmin(){
+        initPostgresConnection();
+        //initAS400Connection();
 
+    }
+
+    public void initPostgresConnection(){
         try {
+
             //OPTION1 ADVANCED
             String url = "jdbc:postgresql://rogue.db.elephantsql.com/aaxmvslp";
             Properties props= new Properties();
@@ -28,6 +34,24 @@ public class DBAdmin {
         //OPTION2 BASIC
         //String url = "jdbc:postgresql://localhost/test?user=fred&password=secret&ssl=true";
         //Connection conn = DriverManager.getConnection(url);
+    }
+
+    public void initAS400Connection(String user,String Password){
+        try {
+
+            //OPTION1 ADVANCED
+            String url = "jdbc:as400://hfi_dev;TGLCQA";
+            Properties props = new Properties();
+
+            System.out.println("Trying to Connect to DB2......");
+
+            Class.forName("com.ibm.as400.access.AS400JDBCDriver");
+            conn = DriverManager.getConnection(url, user, Password);
+            System.out.println("Connected to DB2...Hurray");
+
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
     public void getUserTable(){
