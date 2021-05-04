@@ -4,6 +4,7 @@ import com.neoland.infraestructure.Building;
 import com.neoland.infraestructure.Bungalow;
 import com.neoland.infraestructure.Complex;
 import com.neoland.infraestructure.Property;
+import com.neoland.model.DBAdmin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,6 +39,7 @@ public class MainView {
 
     private MainViewEventsAdmin mainViewEventsAdmin;
 
+    DBAdmin dbAdmin=new DBAdmin();
 
     public MainView(){
         mainViewEventsAdmin=new MainViewEventsAdmin();
@@ -156,10 +158,14 @@ public class MainView {
             }
             else if(e.getSource() == jButtonBuilding){
                 if(property==null){
-                    property=new Building(jTextFieldEIR.getText());
-                    property.addNewFloor(4);
-                    property.addNewFloor(4);
-                    property.addNewFloor(4);
+                    property = dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
+                    if(property==null){
+                        property=new Building(jTextFieldEIR.getText());
+                        dbAdmin.insertProperty(property);
+                    }
+                    //property.addNewFloor(4);
+                    //property.addNewFloor(4);
+                    //property.addNewFloor(4);
                     jLabel.setText("JUST CREATED A BUILDING WITH EIR: "+jTextFieldEIR.getText());
                     jButtonCalculatePrice.setEnabled(true);
                     jButtonCreateFloor.setEnabled(true);
@@ -170,13 +176,21 @@ public class MainView {
 
             }
             else if(e.getSource() == jButtonBungalow){
-                property=new Bungalow(jTextFieldEIR.getText());
+                property = dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
+                if(property==null) {
+                    property = new Bungalow(jTextFieldEIR.getText());
+                    dbAdmin.insertProperty(property);
+                }
                 jButtonCalculatePrice.setEnabled(true);
                 jButtonCreateFloor.setEnabled(true);
                 jLabel.setText("JUST CREATED A Bungalow WITH EIR: "+jTextFieldEIR.getText());
             }
             else if(e.getSource() == jButtonComplex){
-                property=new Complex(jTextFieldEIR.getText());
+                property = dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
+                if(property==null) {
+                    property = new Complex(jTextFieldEIR.getText());
+                    dbAdmin.insertProperty(property);
+                }
                 jButtonCalculatePrice.setEnabled(true);
                 jButtonCreateFloor.setEnabled(true);
                 jLabel.setText("JUST CREATED A Complex WITH EIR: "+jTextFieldEIR.getText());

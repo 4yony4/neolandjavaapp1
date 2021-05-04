@@ -2,6 +2,8 @@ package com.neoland.spaces;
 
 import com.neoland.materials.Door;
 
+import java.util.Arrays;
+
 public class Floor {
 
     private Room arRooms[];
@@ -58,5 +60,41 @@ public class Floor {
         }
     }
 
+    public Room[] getArRooms() {
+        return arRooms;
+    }
 
+    public void setArRooms(Room[] arRooms) {
+        this.arRooms = arRooms;
+    }
+
+    public int getiNumberOfRooms() {
+        return iNumberOfRooms;
+    }
+
+    public void setiNumberOfRooms(int iNumberOfRooms) {
+        this.iNumberOfRooms = iNumberOfRooms;
+    }
+
+    public int getiExistingRooms() {
+        return iExistingRooms;
+    }
+
+    public void setiExistingRooms(int iExistingRooms) {
+        this.iExistingRooms = iExistingRooms;
+    }
+
+    public void setdPrice(double dPrice) {
+        this.dPrice = dPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Floor{" +
+                "arRooms=" + Arrays.toString(arRooms) +
+                ", iNumberOfRooms=" + iNumberOfRooms +
+                ", iExistingRooms=" + iExistingRooms +
+                ", dPrice=" + dPrice +
+                '}';
+    }
 }

@@ -2,6 +2,7 @@ package com.neoland.model;
 
 import com.neoland.dataclass.User;
 import com.neoland.infraestructure.Property;
+import com.neoland.spaces.Floor;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -104,6 +105,73 @@ public class DBAdmin {
             throwables.printStackTrace();
         }
         return userReturn;
+    }
+
+    public Property getPropertyByEIRCode(String sEir){
+        Property property=null;
+        try{
+            String sQuery = "SELECT * FROM \"public\".\"property\" WHERE seircode='"+sEir+"'";
+            Statement stmt= conn.createStatement();
+            ResultSet resultSet=stmt.executeQuery(sQuery);
+            boolean blHasNext=resultSet.next();
+            if (blHasNext==true){
+                String sEirCode=resultSet.getString("seircode");
+                String sCountry=resultSet.getString("scounty");
+                String sTown=resultSet.getString("stown");
+                double dPrice=resultSet.getDouble("dprice");
+                property=new Property(sEirCode);
+                property.setsCounty(sCountry);
+                property.setsTown(sTown);
+                property.setdPrice(dPrice);
+
+                ArrayList<Floor> arFloors=getFloorsOfProperty(property);
+                property.setArFloors(arFloors);
+            }
+
+            resultSet.close();
+            stmt.close();
+            //System.out.println(arUsers);
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return property;
+    }
+
+    public ArrayList<Floor> getFloorsOfProperty(Property property){
+        ArrayList<Floor> arFloors=new ArrayList<Floor>();
+        try{
+            String sQuery="SELECT * FROM \"public\".\"floors\" WHERE propertyeir=? LIMIT 100";
+            PreparedStatement pstmt=conn.prepareStatement(sQuery);
+            pstmt.setString(1,property.getsEirCode());
+
+            System.out.println(pstmt);
+
+            ResultSet resultSet=pstmt.executeQuery();
+
+            boolean blHasNext=resultSet.next();
+            while (blHasNext==true){
+                int id=resultSet.getInt("id");
+                double dprice=resultSet.getDouble("dprice");
+                int iExistingRooms=resultSet.getInt("iexistingrooms");
+                //String propertyeir=resultSet.getString("propertyeir");
+                int iNumberOfRooms=resultSet.getInt("inumberofrooms");
+
+                Floor floor=new Floor(iNumberOfRooms);
+                floor.setiExistingRooms(iExistingRooms);
+                floor.setdPrice(dprice);
+
+                arFloors.add(floor);
+
+                blHasNext=resultSet.next();
+            }
+            resultSet.close();
+            pstmt.close();
+            //System.out.println(arUsers);
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return arFloors;
+
     }
 
     public void insertProperty(Property property){

@@ -1,7 +1,9 @@
 package com.neoland;
 
 import com.neoland.dataclass.User;
+import com.neoland.infraestructure.Property;
 import com.neoland.model.DBAdmin;
+import com.neoland.views.MainView;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 import java.io.*;
@@ -11,7 +13,20 @@ import java.util.HashMap;
 public class Principal{
 
 
+
     public static void main(String args[]){
+
+        //MainView mainView=new MainView();
+
+        DBAdmin dbAdmin=new DBAdmin();
+        Property property=dbAdmin.getPropertyByEIRCode("99999V");
+        System.out.println(property);
+
+    }
+
+
+
+    public static void mainV1(String args[]){
         //MainView mainView=new MainView();
         DBAdmin dbAdmin=new DBAdmin();
         //dbAdmin.getUserTable();

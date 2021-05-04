@@ -69,4 +69,45 @@ public class Property extends Object {
     public ArrayList<Floor> getArFloors() {
         return arFloors;
     }
+
+    public void setsEirCode(String sEirCode) {
+        this.sEirCode = sEirCode;
+    }
+
+    public void setsCounty(String sCounty) {
+        this.sCounty = sCounty;
+    }
+
+    public void setsTown(String sTown) {
+        this.sTown = sTown;
+    }
+
+    public void setsStreet(String sStreet) {
+        this.sStreet = sStreet;
+    }
+
+    public void setdSurface(double dSurface) {
+        this.dSurface = dSurface;
+    }
+
+    public void setdPrice(double dPrice) {
+        this.dPrice = dPrice;
+    }
+
+    public void setArFloors(ArrayList<Floor> arFloors) {
+        this.arFloors = arFloors;
+    }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "sEirCode='" + sEirCode + '\'' +
+                ", sCounty='" + sCounty + '\'' +
+                ", sTown='" + sTown + '\'' +
+                ", sStreet='" + sStreet + '\'' +
+                ", dSurface=" + dSurface +
+                ", dPrice=" + dPrice +
+                ", arFloors=" + arFloors +
+                '}';
+    }
 }
