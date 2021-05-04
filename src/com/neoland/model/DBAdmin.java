@@ -1,6 +1,7 @@
 package com.neoland.model;
 
 import com.neoland.dataclass.User;
+import com.neoland.infraestructure.Property;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class DBAdmin {
         HashMap<String,User> mapUsers=new HashMap();
         try{
             Statement stmt= conn.createStatement();
-            ResultSet resultSet=stmt.executeQuery("SELECT * FROM \"public\".\"users\"");
+            ResultSet resultSet=stmt.executeQuery("SELECT * FROM \"public\".\"users\" LIMIT 100");
             boolean blHasNext=resultSet.next();
             while (blHasNext==true){
                 int id=resultSet.getInt("iuser");
@@ -83,6 +84,50 @@ public class DBAdmin {
         }
         return mapUsers;
     }
+
+    public User getUserByID(String uid){
+        User userReturn=null;
+        try{
+            String sQuery = "SELECT * FROM \"public\".\"users\" WHERE iuser='"+uid+"'";
+            Statement stmt= conn.createStatement();
+            ResultSet resultSet=stmt.executeQuery(sQuery);
+            boolean blHasNext=resultSet.next();
+            if (blHasNext==true){
+                int id=resultSet.getInt("iuser");
+                String name=resultSet.getString("iname");
+                userReturn=new User(id,name);
+            }
+            resultSet.close();
+            stmt.close();
+            //System.out.println(arUsers);
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return userReturn;
+    }
+
+    public void insertProperty(Property property){
+        try{
+            String sQuery = "insert into property (seircode,scounty,stown,dprice) values (?, ?, ?, ?)";
+
+            // create the mysql insert preparedstatement
+            PreparedStatement preparedStmt = conn.prepareStatement(sQuery);
+            preparedStmt.setString(1,property.getsEirCode());
+            preparedStmt.setString(2,property.getsCounty());
+            preparedStmt.setString(3,property.getsTown());
+            preparedStmt.setDouble(4,property.getdPrice());
+            //preparedStmt.setInt (1, id);
+            //preparedStmt.setString (2, name);
+            System.out.println(preparedStmt);
+
+            preparedStmt.execute();
+            preparedStmt.close();
+
+        }catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 
     public void insertUser(int id,String name){
         try{

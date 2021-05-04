@@ -1,5 +1,9 @@
 package com.neoland.dataclass;
 
+import com.neoland.materials.Door;
+
+import javax.swing.*;
+
 public class User implements java.io.Serializable{
 
     //YOU HAVE TO HAVE THE SAME NAME FOR THE ATTRIBUTES AND COLUMNS!!!! THEY HAVE TO BE THE SAME, EVEN UPPER AND LOWER CASE

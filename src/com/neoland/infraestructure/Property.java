@@ -45,4 +45,28 @@ public class Property extends Object {
         }
         return dPrice;
     }
+
+    public String getsEirCode() {
+        return sEirCode;
+    }
+
+    public String getsCounty() {
+        return sCounty;
+    }
+
+    public String getsTown() {
+        return sTown;
+    }
+
+    public String getsStreet() {
+        return sStreet;
+    }
+
+    public double getdSurface() {
+        return dSurface;
+    }
+
+    public ArrayList<Floor> getArFloors() {
+        return arFloors;
+    }
 }
