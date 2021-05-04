@@ -5,6 +5,7 @@ import com.neoland.infraestructure.Bungalow;
 import com.neoland.infraestructure.Complex;
 import com.neoland.infraestructure.Property;
 import com.neoland.model.DBAdmin;
+import com.neoland.model.DBAdminListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -145,7 +146,7 @@ public class MainView {
 
     }
 
-    class MainViewEventsAdmin implements ActionListener, WindowListener {
+    class MainViewEventsAdmin implements ActionListener, WindowListener, DBAdminListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //JButton jButtonAction=(JButton)e.getSource();
@@ -159,6 +160,7 @@ public class MainView {
             else if(e.getSource() == jButtonBuilding){
                 if(property==null){
                     property = dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
+
                     if(property==null){
                         property=new Building(jTextFieldEIR.getText());
                         dbAdmin.insertProperty(property);
@@ -236,6 +238,7 @@ public class MainView {
         public void windowDeactivated(WindowEvent e) {
 
         }
+
     }
 }
 
