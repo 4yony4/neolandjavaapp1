@@ -1,12 +1,26 @@
 package com.neoland;
 
-import com.neoland.threads.Car;
+import com.neoland.threads.*;
 import com.neoland.threads.Process;
-import com.neoland.threads.ZebraCrossing;
 
 public class MainThreads {
 
-    public static void main(String args[]){
+    public static void main(String[] args)
+    {
+        PrinterQueue printerQueue = new PrinterQueue();
+        Thread thread[] = new Thread[10];
+        for (int i = 0; i < 10; i++)
+        {
+            PrintingJob printingJob=new PrintingJob(printerQueue);
+            thread[i] = new Thread(printingJob, "Thread " + i);
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            thread[i].start();
+        }
+    }
+
+    public static void mainV1(String args[]){
 
         /*Process process =new Process("Process1");
         Process process2 =new Process("Process2");
