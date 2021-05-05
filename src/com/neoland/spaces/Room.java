@@ -112,4 +112,8 @@ public class Room {
     public void destroy(){
 
     }
+
+    public Door[] getDoors() {
+        return doors;
+    }
 }

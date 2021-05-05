@@ -2,10 +2,11 @@ package com.neoland;
 
 import com.neoland.threads.*;
 import com.neoland.threads.Process;
+import com.neoland.views.MainView;
 
 public class MainThreads {
 
-    public static void main(String[] args)
+    public static void mainV1(String[] args)
     {
         PrinterQueue printerQueue = new PrinterQueue();
         Thread thread[] = new Thread[10];
@@ -20,7 +21,7 @@ public class MainThreads {
         }
     }
 
-    public static void mainV1(String args[]){
+    public static void main(String args[]){
 
         /*Process process =new Process("Process1");
         Process process2 =new Process("Process2");
@@ -28,16 +29,34 @@ public class MainThreads {
         Thread thread2=new Thread(process2);
         thread.start();
         thread2.start();*/
+        Thread thread[] = new Thread[10];
         ZebraCrossing zebraCrossing=new ZebraCrossing();
         int i=0;
         while(i<10){
             Car car=new Car("Car"+i,zebraCrossing);
-            Thread thread=new Thread(car);
-            thread.start();
+            thread[i]=new Thread(car);
+            i++;
+        }
+        i=0;
+        while(i<10){
+            thread[i].start();
             i++;
         }
 
 
+        /*i=0;
+        while(i<10){
+            try{
+                thread[i].join();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            i++;
+        }*/
+
+        //MainView mainView=new MainView();
+
+        //System.out.println("------->>>>>>>FINISHED THE MAIN PROCESS APP");
     }
 
 

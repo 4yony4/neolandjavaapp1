@@ -21,6 +21,7 @@ public class Car implements Runnable{
     public void run() {
         while(iState!=I_CROSSED){
             if(iState==I_WAITING){
+                System.out.println(sName+" IS ATTEMPTING TO CROSS");
                 zebraCrossing.setsCrossingCarName(sName);
                 iState=I_CROSSED;
             }

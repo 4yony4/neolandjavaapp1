@@ -3,6 +3,7 @@ package com.neoland.model;
 import com.neoland.dataclass.User;
 import com.neoland.infraestructure.Property;
 import com.neoland.spaces.Floor;
+import com.neoland.views.MainView;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -13,11 +14,18 @@ import java.util.Properties;
 public class DBAdmin {
 
     private Connection conn;
+    private ArrayList<DBAdminListener> listeners;
 
     public DBAdmin(){
-        initPostgresConnection();
+        listeners=new ArrayList();
+        //initPostgresConnection();
         //initAS400Connection();
 
+    }
+
+    public void addListener(DBAdminListener listener){
+        //this.listener=listener;
+        listeners.add(listener);
     }
 
     public void initPostgresConnection(){
@@ -27,15 +35,22 @@ public class DBAdmin {
             String url = "jdbc:postgresql://rogue.db.elephantsql.com/aaxmvslp";
             Properties props= new Properties();
             props.setProperty("user","aaxmvslp");
-            props.setProperty("password","qg2UIHZnJqXKL8TUgmXEff1c38lNn11Q");
+            props.setProperty("password","qg2UIHZnJqXKL8TUgmXEff1c38lNn11Qa");
             props.setProperty("ssl","false");
             conn = DriverManager.getConnection(url, props);
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).conexionSuccess(true);
+            }
+
             //jdbc:db2://dashdb-txn-sbox-yp-lon02-13.services.eu-gb.bluemix.net:50001/BLUDB:user=rwq82195;password=<your_password>;sslConnection=true;
 
             /*String url = "jdbc:db2://dashdb-txn-sbox-yp-lon02-13.services.eu-gb.bluemix.net:50000/BLUDB:user=rwq82195;password=ClassDB2021";
             conn = DriverManager.getConnection(url);*/
 
         } catch (SQLException throwables) {
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).conexionSuccess(false);
+            }
             throwables.printStackTrace();
         }
         //OPTION2 BASIC

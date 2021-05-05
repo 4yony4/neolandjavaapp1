@@ -40,16 +40,23 @@ public class MainView {
 
     private MainViewEventsAdmin mainViewEventsAdmin;
 
-    DBAdmin dbAdmin=new DBAdmin();
+    DBAdmin dbAdmin;
 
-    public MainView(){
+    public MainView(DBAdmin dbAdmin){
         mainViewEventsAdmin=new MainViewEventsAdmin();
+
         initScreen();
+
+        this.dbAdmin=dbAdmin;
+        dbAdmin.addListener(mainViewEventsAdmin);
+        //dbAdmin.initPostgresConnection();
     }
 
     public void initScreen(){
         jFrameMain=new JFrame();
         jFrameMain.addWindowListener(mainViewEventsAdmin);
+
+
 
         initPanels();
         initLabels();
@@ -59,6 +66,7 @@ public class MainView {
 
         jFrameMain.pack();
         jFrameMain.setVisible(true);
+
     }
 
     /**
@@ -146,7 +154,7 @@ public class MainView {
 
     }
 
-    class MainViewEventsAdmin implements ActionListener, WindowListener, DBAdminListener {
+    public class MainViewEventsAdmin implements ActionListener, WindowListener, DBAdminListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //JButton jButtonAction=(JButton)e.getSource();
@@ -239,6 +247,11 @@ public class MainView {
 
         }
 
+        @Override
+        public void conexionSuccess(boolean blSuccess) {
+            jLabel.setText("THE CONEXION WAS "+blSuccess);
+            System.out.println("MAIN VIEW LISTENER: ->> CONEXION WAS: "+blSuccess);
+        }
     }
 }
 

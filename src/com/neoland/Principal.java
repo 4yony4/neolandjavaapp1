@@ -3,6 +3,7 @@ package com.neoland;
 import com.neoland.dataclass.User;
 import com.neoland.infraestructure.Property;
 import com.neoland.model.DBAdmin;
+import com.neoland.model.DBAdminListener;
 import com.neoland.views.MainView;
 import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
@@ -10,18 +11,38 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Principal{
+public class Principal implements DBAdminListener {
 
-
+    static DBAdmin dbAdmin;
 
     public static void main(String args[]){
 
         //MainView mainView=new MainView();
+        Principal principal=new Principal();
 
-        DBAdmin dbAdmin=new DBAdmin();
-        Property property=dbAdmin.getPropertyByEIRCode("99999V");
-        System.out.println(property);
+        dbAdmin=new DBAdmin();
 
+
+        MainView mainView=new MainView(dbAdmin);
+        dbAdmin.addListener(principal);
+        dbAdmin.initPostgresConnection();
+        System.out.println("WELCOME TO PRINCIPAL APP");
+        //Property property=dbAdmin.getPropertyByEIRCode("99999V");
+        //System.out.println(property);
+
+
+
+
+
+    }
+
+    @Override
+    public void conexionSuccess(boolean blSuccess) {
+        System.out.println("LISTENER IS: Principal ----> THE CONEXION WAS: "+blSuccess);
+        if(blSuccess==true){
+            Property property=dbAdmin.getPropertyByEIRCode("99999V");
+            System.out.println(property);
+        }
     }
 
 
@@ -107,5 +128,6 @@ public class Principal{
     public double mathSum(String a, String b){
         return Double.parseDouble(a)+Double.parseDouble(b);
     }
+
 
 }
