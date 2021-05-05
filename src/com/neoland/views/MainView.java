@@ -1,5 +1,6 @@
 package com.neoland.views;
 
+import com.neoland.dataclass.User;
 import com.neoland.infraestructure.Building;
 import com.neoland.infraestructure.Bungalow;
 import com.neoland.infraestructure.Complex;
@@ -13,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.util.HashMap;
 
 /**
  * THE VIEW
@@ -34,7 +36,8 @@ public class MainView {
     /*private Building building=null;
     private Complex complex=null;
     private Bungalow bungalow=null;*/
-    public Property property=null;
+    public Property propertyGlobal=null;
+    public int iPropertyCreationType=0;
 
     public JPanel panelCreatePropertyForm = null;
 
@@ -120,6 +123,7 @@ public class MainView {
         jButtonBungalow.setText("Create Bungalow");
         jButtonBungalow.addActionListener(mainViewEventsAdmin);
 
+
         jButtonComplex=new JButton();
         jButtonComplex.setText("Create Complex");
         jButtonComplex.addActionListener(mainViewEventsAdmin);
@@ -166,47 +170,38 @@ public class MainView {
                 System.exit(0);
             }
             else if(e.getSource() == jButtonBuilding){
-                if(property==null){
-                    property = dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
-
-                    if(property==null){
-                        property=new Building(jTextFieldEIR.getText());
-                        dbAdmin.insertProperty(property);
-                    }
-                    //property.addNewFloor(4);
-                    //property.addNewFloor(4);
-                    //property.addNewFloor(4);
-                    jLabel.setText("JUST CREATED A BUILDING WITH EIR: "+jTextFieldEIR.getText());
-                    jButtonCalculatePrice.setEnabled(true);
-                    jButtonCreateFloor.setEnabled(true);
-                }
-                else{
-                    jLabel.setText("YOU ALREADY CREATED A BUILDING  ");
-                }
+                //if(propertyGlobal==null){
+                    iPropertyCreationType=1;
+                    dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
+                //}
+                //else{
+               //     jLabel.setText("YOU ALREADY CREATED A PROPERTY  ");
+                //}
 
             }
             else if(e.getSource() == jButtonBungalow){
-                property = dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
-                if(property==null) {
-                    property = new Bungalow(jTextFieldEIR.getText());
-                    dbAdmin.insertProperty(property);
-                }
-                jButtonCalculatePrice.setEnabled(true);
-                jButtonCreateFloor.setEnabled(true);
-                jLabel.setText("JUST CREATED A Bungalow WITH EIR: "+jTextFieldEIR.getText());
+                //if(propertyGlobal==null){
+                    iPropertyCreationType=2;
+                    dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
+                //}
+               // else{
+                    jLabel.setText("YOU ALREADY CREATED A PROPERTY  ");
+                //}
+
             }
             else if(e.getSource() == jButtonComplex){
-                property = dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
-                if(property==null) {
-                    property = new Complex(jTextFieldEIR.getText());
-                    dbAdmin.insertProperty(property);
-                }
-                jButtonCalculatePrice.setEnabled(true);
-                jButtonCreateFloor.setEnabled(true);
-                jLabel.setText("JUST CREATED A Complex WITH EIR: "+jTextFieldEIR.getText());
+                //if(propertyGlobal==null){
+                    iPropertyCreationType=3;
+                    dbAdmin.getPropertyByEIRCode(jTextFieldEIR.getText());
+                //}
+                //else{
+                //    jLabel.setText("YOU ALREADY CREATED A PROPERTY  ");
+                //}
+
+
             }
             else if(e.getSource()==jButtonCalculatePrice){
-                double finalPrice=property.getdPrice();
+                double finalPrice=propertyGlobal.getdPrice();
                 jLabel.setText("THE PRICE IS: "+finalPrice);
 
             }
@@ -251,6 +246,44 @@ public class MainView {
         public void conexionSuccess(boolean blSuccess) {
             jLabel.setText("THE CONEXION WAS "+blSuccess);
             System.out.println("MAIN VIEW LISTENER: ->> CONEXION WAS: "+blSuccess);
+        }
+
+        @Override
+        public void dbResponseUsers(HashMap<String, User> mapUsers) {
+            System.out.println("MAIN VIEW LISTENER: ->> USERS ARE: "+mapUsers);
+            jLabel.setText("FIRST USER NAME: "+mapUsers.get("1").iname);
+        }
+
+        @Override
+        public void dbResponseProperyElement(Property property) {
+
+            if(property==null){
+                if(iPropertyCreationType==1){
+                    property=new Building(jTextFieldEIR.getText());
+                }
+                else if(iPropertyCreationType==2){
+                    property=new Bungalow(jTextFieldEIR.getText());
+                }
+                else if(iPropertyCreationType==3){
+                    property=new Complex(jTextFieldEIR.getText());
+                }
+
+                jLabel.setText("JUST CREATED A PROPERTY WITH EIR: "+jTextFieldEIR.getText());
+                dbAdmin.insertProperty(property);
+
+            }
+            else{
+                jLabel.setText("PROPERTY ALREADY EXISTS "+jTextFieldEIR.getText());
+            }
+
+            propertyGlobal=property;
+            //property.addNewFloor(4);
+            //property.addNewFloor(4);
+            //property.addNewFloor(4);
+
+            jButtonCalculatePrice.setEnabled(true);
+            jButtonCreateFloor.setEnabled(true);
+            //System.out.println("MAIN VIEW LISTENER: ->> PROPERTY IS: "+property);
         }
     }
 }

@@ -77,7 +77,7 @@ public class Door {
 
     @Override
     public String toString() {
-        return "Door{" +
+        /*return "Door{" +
                 "sColor='" + sColor + '\'' +
                 ", dHeight=" + dHeight +
                 ", dWidth=" + dWidth +
@@ -86,7 +86,8 @@ public class Door {
                 ", dPrice=" + dPrice +
                 ", doorNob=" + doorNob +
                 ", blShared=" + blShared +
-                '}';
+                '}';*/
+        return " dPrice=" + dPrice;
     }
 
     public String getsColor(){

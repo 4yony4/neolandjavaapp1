@@ -35,7 +35,7 @@ public class DBAdmin {
             String url = "jdbc:postgresql://rogue.db.elephantsql.com/aaxmvslp";
             Properties props= new Properties();
             props.setProperty("user","aaxmvslp");
-            props.setProperty("password","qg2UIHZnJqXKL8TUgmXEff1c38lNn11Qa");
+            props.setProperty("password","qg2UIHZnJqXKL8TUgmXEff1c38lNn11Q");
             props.setProperty("ssl","false");
             conn = DriverManager.getConnection(url, props);
             for (int i=0;i<listeners.size();i++){
@@ -71,12 +71,19 @@ public class DBAdmin {
             conn = DriverManager.getConnection(url, user, Password);
             System.out.println("Connected to DB2...Hurray");
 
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).conexionSuccess(true);
+            }
+
         } catch (SQLException | ClassNotFoundException throwables) {
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).conexionSuccess(false);
+            }
             throwables.printStackTrace();
         }
     }
 
-    public HashMap<String,User> getUserTable(){
+    public void getUserTable(){
         HashMap<String,User> mapUsers=new HashMap();
         try{
             Statement stmt= conn.createStatement();
@@ -94,11 +101,18 @@ public class DBAdmin {
             }
             resultSet.close();
             stmt.close();
+
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).dbResponseUsers(mapUsers);
+            }
             //System.out.println(arUsers);
         }catch (SQLException throwables) {
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).dbResponseUsers(mapUsers);
+            }
             throwables.printStackTrace();
         }
-        return mapUsers;
+
     }
 
     public User getUserByID(String uid){
@@ -122,7 +136,7 @@ public class DBAdmin {
         return userReturn;
     }
 
-    public Property getPropertyByEIRCode(String sEir){
+    public void getPropertyByEIRCode(String sEir){
         Property property=null;
         try{
             String sQuery = "SELECT * FROM \"public\".\"property\" WHERE seircode='"+sEir+"'";
@@ -145,11 +159,18 @@ public class DBAdmin {
 
             resultSet.close();
             stmt.close();
+
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).dbResponseProperyElement(property);
+            }
             //System.out.println(arUsers);
         }catch (SQLException throwables) {
+            for (int i=0;i<listeners.size();i++){
+                listeners.get(i).dbResponseProperyElement(null);
+            }
             throwables.printStackTrace();
         }
-        return property;
+
     }
 
     public ArrayList<Floor> getFloorsOfProperty(Property property){
